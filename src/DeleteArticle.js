@@ -1,5 +1,9 @@
 import React, {useState} from 'react';
 
+import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+
 const DeleteArticle= () => {
     const [ id, setId ] = useState(""); // let id
 
@@ -16,16 +20,21 @@ const DeleteArticle= () => {
         }
     }
     return (
-        <form onSubmit={handleSubmit}>
-            <input
-                type="number"
-                name="id"
-                onChange={handleChange}
-                value={id}
-                placeholder="id de l'Article à supprimer"
-            />
-            <button type="submit">Supprimer l'article</button>
-        </form>
+        <Container>
+            <Form onSubmit={handleSubmit}>
+                <Form.Group controlId="article.id">
+                    <Form.Label>Id de l'article à supprimer</Form.Label>
+                    <Form.Control
+                        type="number"
+                        name="id"
+                        onChange={handleChange}
+                        value={id}
+                        placeholder="id de l'Article à supprimer"
+                    />
+                </Form.Group>
+                <Button type="submit">Supprimer l'article</Button>
+            </Form>
+        </Container>
     );
 }
 
