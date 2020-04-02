@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 
+import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+
 const CreateArticle = () => {
-    const [ title, setTitle ] = useState("");
-    const [ content, setContent ] = useState("");
-    const [ author, setAuthor ] = useState("");
+    const [title, setTitle] = useState("");
+    const [content, setContent] = useState("");
+    const [author, setAuthor] = useState("");
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -16,7 +20,7 @@ const CreateArticle = () => {
         console.log("target name : ", event.target.name);
         console.log("target value : ", event.target.value);
 
-        switch(event.target.name) {
+        switch (event.target.name) {
             case "title":
                 setTitle(event.target.value);
                 break;
@@ -31,30 +35,41 @@ const CreateArticle = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input
-                type="text"
-                name="title"
-                onChange={handleChange}
-                value={title}
-                placeholder="titre de l'article"
-            />
-            <textarea
-                name="content"
-                onChange={handleChange}
-                value={content}
-                placeholder="contenu du l'article"
-                >
-            </textarea>
-            <input
-                type="number"
-                name="author"
-                onChange={handleChange}
-                value={author}
-                placeholder="id de l'auteur"
-            />
-            <button type="submit">Créer l'article</button>
-        </form>
+        <Container>
+            <Form onSubmit={handleSubmit}>
+                <Form.Group controlId="article.title">
+                    <Form.Label>Titre de l'article</Form.Label>
+                    <Form.Control
+                        type="text"
+                        name="title"
+                        onChange={handleChange}
+                        value={title}
+                        placeholder="Titre de l'article"
+                    />
+                </Form.Group>
+                <Form.Group controlId="article.content">
+                    <Form.Label>Contenu de l'article</Form.Label>
+                    <Form.Control
+                        as="textarea"
+                        name="content"
+                        onChange={handleChange}
+                        value={content}
+                        placeholder="contenu de l'article"
+                    />
+                </Form.Group>
+                <Form.Group controlId="article.author">
+                    <Form.Label>ID de l'auteur</Form.Label>
+                    <Form.Control
+                        type="number"
+                        name="author"
+                        onChange={handleChange}
+                        value={author}
+                        placeholder="id de l'auteur"
+                    />
+                </Form.Group>
+                <Button variant="primary" type="submit">Créer l'article</Button>
+            </Form>
+        </Container>
     )
 };
 

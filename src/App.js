@@ -1,10 +1,10 @@
 import React from 'react';
-import DeleteArticle from './DeleteArticle';
+import CreateArticle from './CreateArticle';
 
 const App = () => {
   return (
     <div>
-      <DeleteArticle />
+      <CreateArticle />
     </div>
   );
 }
