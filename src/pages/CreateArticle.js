@@ -44,7 +44,6 @@ const CreateArticle = () => {
                         name="title"
                         onChange={handleChange}
                         value={title}
-                        placeholder="Titre de l'article"
                     />
                 </Form.Group>
                 <Form.Group controlId="article.content">
@@ -54,7 +53,6 @@ const CreateArticle = () => {
                         name="content"
                         onChange={handleChange}
                         value={content}
-                        placeholder="contenu de l'article"
                     />
                 </Form.Group>
                 <Form.Group controlId="article.author">
@@ -64,13 +62,12 @@ const CreateArticle = () => {
                         name="author"
                         onChange={handleChange}
                         value={author}
-                        placeholder="id de l'auteur"
                     />
                 </Form.Group>
                 <Button variant="primary" type="submit">Créer l'article</Button>
             </Form>
         </Container>
-    )
-};
+    );
+}
 
 export default CreateArticle;
