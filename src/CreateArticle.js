@@ -28,7 +28,6 @@ const CreateArticle = () => {
                 break;
             //no default
         }
-
     }
 
     return (
