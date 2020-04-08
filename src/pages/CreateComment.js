@@ -4,46 +4,25 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-const CreateArticle = () => {
-    const [title, setTitle] = useState("");
+const CreateComment = () => {
+    const [idArticle, setidArticle] = useState("");
     const [content, setContent] = useState("");
     const [author, setAuthor] = useState("");
 
     const handleSubmit = (event) => {
         event.preventDefault();
-
-        fetch('http://localhost:3001/api/articles/create', {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-            },
-            body: JSON.stringify({
-                title,
-                content,
-                author,
-            }),
-        })
-        .then((result) => {
-            return result.json();
-        })
-        .then(({ status }) => {
-            if (status === "OK"){
-                setTitle("");
-                setContent("");
-                setAuthor("");
-            }
-            console.log(status);
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-    };
+        console.log("Id Article : ", idArticle);
+        console.log("content : ", content);
+        console.log("author : ", author);
+    }
 
     const handleChange = (event) => {
+        console.log("target name : ", event.target.name);
+        console.log("target value : ", event.target.value);
+
         switch (event.target.name) {
-            case "title":
-                setTitle(event.target.value);
+            case "idArticle":
+                setidArticle(event.target.value);
                 break;
             case "content":
                 setContent(event.target.value);
@@ -58,17 +37,17 @@ const CreateArticle = () => {
     return (
         <Container>
             <Form onSubmit={handleSubmit}>
-                <Form.Group controlId="article.title">
-                    <Form.Label>Titre de l'article</Form.Label>
+                <Form.Group controlId="comment.idArticle">
+                    <Form.Label>Id de l'article du commentaire</Form.Label>
                     <Form.Control
-                        type="text"
-                        name="title"
+                        type="number"
+                        name="idArticle"
                         onChange={handleChange}
-                        value={title}
-                    />
+                        value={idArticle}
+                        placeholder="Id de l'article" />
                 </Form.Group>
-                <Form.Group controlId="article.content">
-                    <Form.Label>Contenu de l'article</Form.Label>
+                <Form.Group controlId="comment.content">
+                    <Form.Label>Contenu du commentaire</Form.Label>
                     <Form.Control
                         as="textarea"
                         name="content"
@@ -76,7 +55,7 @@ const CreateArticle = () => {
                         value={content}
                     />
                 </Form.Group>
-                <Form.Group controlId="article.author">
+                <Form.Group controlId="comment.author">
                     <Form.Label>ID de l'auteur</Form.Label>
                     <Form.Control
                         type="number"
@@ -85,10 +64,10 @@ const CreateArticle = () => {
                         value={author}
                     />
                 </Form.Group>
-                <Button variant="primary" type="submit">Créer l'article</Button>
+                <Button variant="primary" type="submit">Créer le commentaire</Button>
             </Form>
         </Container>
     );
 }
 
-export default CreateArticle;
+export default CreateComment;
