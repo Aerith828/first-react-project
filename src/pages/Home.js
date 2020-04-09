@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import Container from 'react-bootstrap/Container';
 import CardDeck from 'react-bootstrap/Card';
@@ -32,7 +33,7 @@ const Home = () => {
             <Card key={id}>
                 <Card.Header>
                     <Card.Title as="h5">
-                        {title}
+                        <Link to={"/article/" + id}>{title}</Link>
                     </Card.Title>
                 </Card.Header>
                 <Card.Body>
