@@ -49,7 +49,7 @@ const ViewArticle = ( { match }) => {
                 toast.error("Oups ... Nous avons eu une erreur !");
                 console.log(error);
             })
-    }, [ ])
+    }, [ id ])
 
     const renderedComments = comments.map((comment) => {
         const { content, created_at, authorFirstname, authorLastname } = comment;
