@@ -20,11 +20,6 @@ const Navigation = () => {
                     Supprimer un article
                 </Nav.Link>
             </Nav.Item>
-            <Nav.Item>
-                <Nav.Link as={Link} to="/comments/delete">
-                    Supprimer un commentaire
-                </Nav.Link>
-            </Nav.Item>
         </Nav>
     );
 }

@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import { formatDate } from '../utils/date';
+
 import { ListGroup } from 'react-bootstrap';
 import { toast } from 'react-toastify';
+
 import CreateComment from '../components/CreateComment';
+import ViewComment from '../components/ViewComment';
 
 const ViewComments = ({ article_id }) => {
     const [ comments, setComments ] = useState([]);
@@ -33,18 +35,22 @@ const ViewComments = ({ article_id }) => {
         setComments(newComments);
     }
 
+    const handleDelete= (commentId) => {
+        const newComments = comments.filter((comment) => {
+            return comment.id !== commentId;
+        })
+        
+        setComments(newComments);
+    }
+
     const renderedComments = comments.map((comment) => {
-        const { id, content, created_at, authorFirstname, authorLastname } = comment;
+        
         return (
-            <ListGroup.Item key={id}>
-                <p>
-                    {content}
-                </p>
-                <small className="text-muted">
-                    par {authorFirstname} {authorLastname}&nbsp;
-                    le {formatDate(created_at)}
-                </small>
-            </ListGroup.Item>
+            <ViewComment 
+            key={comment.id}
+            comment={comment} 
+            onDelete={handleDelete}
+            />
         );
     });
 
