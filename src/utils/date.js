@@ -1,4 +1,8 @@
 export const formatDate = (date) => {
+    if (!date) {
+        return "";
+    }
+
     let parsedDate = date;
 
     if (typeof date === "string") {

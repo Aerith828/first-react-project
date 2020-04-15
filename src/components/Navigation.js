@@ -21,11 +21,6 @@ const Navigation = () => {
                 </Nav.Link>
             </Nav.Item>
             <Nav.Item>
-                <Nav.Link as={Link} to="/comments/create">
-                    Créer un commentaire
-                </Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
                 <Nav.Link as={Link} to="/comments/delete">
                     Supprimer un commentaire
                 </Nav.Link>
