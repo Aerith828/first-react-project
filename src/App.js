@@ -1,4 +1,5 @@
 import React from 'react';
+import { CookiesProvider} from 'react-cookie';
 import {
   BrowserRouter as Router,
   Switch,
@@ -18,18 +19,20 @@ import NotFound      from './pages/NotFound';
 
 const App = () => {
   return (
-    <Router>
-      <Navigation />
-      <Switch>
-        <Route exact path="/"          component={Home}          />
-        <Route path="/signin"           component={Signin}        />
-        <Route path="/articles/create" component={CreateArticle} />
-        <Route path="/articles/delete" component={DeleteArticle} />
-        <Route path="/article/:id"     component={ViewArticle}   />
-        <Route path="*"                component={NotFound}      />
-      </Switch>
-      <ToastContainer/>
-    </Router>
+    <CookiesProvider>
+      <Router>
+        <Navigation />
+        <Switch>
+          <Route exact path="/"          component={Home}          />
+          <Route path="/signin"           component={Signin}        />
+          <Route path="/articles/create" component={CreateArticle} />
+          <Route path="/articles/delete" component={DeleteArticle} />
+          <Route path="/article/:id"     component={ViewArticle}   />
+          <Route path="*"                component={NotFound}      />
+        </Switch>
+        <ToastContainer/>
+      </Router>
+    </CookiesProvider>
   );
 }
 

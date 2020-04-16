@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useCookies } from 'react-cookie';
 import { toast } from 'react-toastify';
 
 import Container from 'react-bootstrap/Container';
@@ -8,7 +9,8 @@ import Button from 'react-bootstrap/Button';
 const CreateArticle = () => {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
-    const [author, setAuthor] = useState("");
+
+    const [ cookies, setCookie ] = useCookies();
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -22,7 +24,7 @@ const CreateArticle = () => {
             body: JSON.stringify({
                 title,
                 content,
-                author,
+                author: cookies.user.id,
             }),
         })
         .then((result) => {
@@ -32,7 +34,6 @@ const CreateArticle = () => {
             if (status === "OK"){
                 setTitle("");
                 setContent("");
-                setAuthor("");
                 toast.success("L'article a bien été ajouté");
             } else {
                 toast.error(
@@ -57,9 +58,6 @@ const CreateArticle = () => {
             case "content":
                 setContent(event.target.value);
                 break;
-            case "author":
-                setAuthor(event.target.value);
-                break;
             //no default
         }
     }
@@ -83,15 +81,6 @@ const CreateArticle = () => {
                         name="content"
                         onChange={handleChange}
                         value={content}
-                    />
-                </Form.Group>
-                <Form.Group controlId="article.author">
-                    <Form.Label>ID de l'auteur</Form.Label>
-                    <Form.Control
-                        type="number"
-                        name="author"
-                        onChange={handleChange}
-                        value={author}
                     />
                 </Form.Group>
                 <Button variant="primary" type="submit">Créer l'article</Button>

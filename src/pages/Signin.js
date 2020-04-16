@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
+import { useCookies } from 'react-cookie';
+import { toast } from 'react-toastify';
 
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { FormLabel } from 'react-bootstrap';
 
-const Signin = () => {
+const Signin = ({ history }) => {
     const [ email, setEmail ] = useState("");
     const [ password, setPassword ] = useState("");
+
+    const [ cookie, setCookie ] =useCookies();
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -25,6 +28,41 @@ const Signin = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+
+        fetch('http://localhost:3001/api/login', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify({
+                email,
+                password,
+            }),
+        })
+        .then((result) => {
+            return result.json();
+        })
+        .then(({ status, extra, infos }) => {
+            if (status === "OK"){
+                console.log(infos);
+                setCookie("userToken", infos.userToken);
+                setCookie("user", infos.user);
+
+                history.push('/'); // indique la route donc ici Home 
+            } else {
+                toast.error(
+                    <div>
+                        Oups ... Nous avons une erreur ! <br/>
+                        {extra}
+                    </div>
+                );
+            }  
+        })
+        .catch((error) => {
+            toast.error("Oups ... Nous avons eu une erreur ! ");
+            console.log(error);
+        });
     }
 
     return (
